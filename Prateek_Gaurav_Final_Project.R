@@ -137,6 +137,7 @@ line_plot <- metro_cities_filter %>%
     x = ~Date_Time,
     y = ~Pollutant.Avg, 
     customdata = ~City,
+    customdata1 = ~Period,
     color = ~Pollution.ID,
     transforms = list(
       list(
@@ -144,8 +145,15 @@ line_plot <- metro_cities_filter %>%
         target = 'customdata',
         operation = '=',
         value = unique(metro_cities_filter$City)[1]
+      ),
+      list(
+        type = 'filter',
+        target = 'customdata1',
+        operation = '=',
+        value = unique(metro_cities_filter$Period)[1]
       )
     )
+    
   ) %>% layout(
     updatemenus = list(
       list(
@@ -181,19 +189,19 @@ line_plot <- metro_cities_filter %>%
       active = 0,
       buttons = list(
         list(method = "restyle",
-             args = list("transforms[0].value", unique(metro_cities_filter$Period)[1]),
+             args = list("transforms[1].value1", unique(metro_cities_filter$Period)[1]),
              label = unique(metro_cities_filter$Period)[1]),
         list(method = "restyle",
-             args = list("transforms[0].value", unique(metro_cities_filter$Period)[2]),
+             args = list("transforms[1].value1", unique(metro_cities_filter$Period)[2]),
              label = unique(metro_cities_filter$Period)[2]),
         list(method = "restyle",
-             args = list("transforms[0].value", unique(metro_cities_filter$Period)[3]),
+             args = list("transforms[1].value1", unique(metro_cities_filter$Period)[3]),
              label = unique(metro_cities_filter$Period)[3]),
         list(method = "restyle",
-             args = list("transforms[0].value", unique(metro_cities_filter$Period)[4]),
+             args = list("transforms[1].value1", unique(metro_cities_filter$Period)[4]),
              label = unique(metro_cities_filter$Period)[4]),
         list(method = "restyle",
-             args = list("transforms[0].value", unique(metro_cities_filter$Period)[5]),
+             args = list("transforms[1].value1", unique(metro_cities_filter$Period)[5]),
              label = unique(metro_cities_filter$Period)[5])
       )
     )
@@ -201,8 +209,3 @@ line_plot <- metro_cities_filter %>%
     
 
 line_plot
-
-
-
-
-
